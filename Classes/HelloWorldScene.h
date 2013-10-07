@@ -2,6 +2,7 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+USING_NS_CC;
 
 class HelloWorld : public cocos2d::CCLayer
 {
@@ -19,6 +20,9 @@ public:
 
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);
+    // графические и звуковые переменные для класса данной сцены
+    CCSprite * backgroundSprite, *kimmi_go_sprite;
+
 };
 
 #endif // __HELLOWORLD_SCENE_H__

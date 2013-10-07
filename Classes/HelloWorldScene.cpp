@@ -19,19 +19,20 @@ CCScene* HelloWorld::scene()
 
 void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
-	CCTouch* touch = (CCTouch*)( touches->anyObject() );
+	CCTouch* touch = (CCTouch*)( touches->anyObject());
 	CCPoint location = touch->getLocationInView();
 	location = CCDirector::sharedDirector()->convertToGL(location);
 
     // создаём спрайт, который будет анимироваться (это первый кадр из анимации)
-	CCSprite* kimmi_go_sprite = CCSprite::create("kimi_animations/go/000.png");
+	//CCSprite* kimmi_go_sprite = CCSprite::create("kimi_animations/go/000.png");
 	// задаём начальную позицию
-	kimmi_go_sprite->setPosition(location);
+	//kimmi_go_sprite->setPosition(location);
 	// задаём якорь на координаты верхнего левого угла (по умолчанию якорь по центру)
-	kimmi_go_sprite->setAnchorPoint(ccp(0, 1));
-	// добавляем на сцену в 3-й слой
-	this->addChild(kimmi_go_sprite, 4);
-
+	//kimmi_go_sprite->setAnchorPoint(ccp(0, 1));
+	// добавляем на сцену в 4-й слой
+	//this->addChild(kimmi_go_sprite, 4);
+	CCAction *act = CCMoveTo::create(2,location);
+	kimmi_go_sprite->runAction(act);
 }
 
 // on "init" you need to initialize your instance
@@ -83,23 +84,23 @@ bool HelloWorld::init()
     // add the label as a child to this layer
     this->addChild(pLabel, 1);
 
-    // add "HelloWorld" splash screen"
-    CCSprite* pSprite = CCSprite::create("006.png");
+    // загружаем и выводим фон
+    backgroundSprite = CCSprite::create("006.png");
     // position the sprite on the center of the screen
-    pSprite->setPosition(ccp(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
+    backgroundSprite->setPosition(ccp(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
     // add the sprite as a child to this layer
-    this->addChild(pSprite, 0);
+    this->addChild(backgroundSprite, 0);
 
     // анимация кимми
     // создаём спрайт, который будет анимироваться (это первый кадр из анимации)
-    CCSprite* kimmi_go_sprite = CCSprite::create("kimi_animations/go/000.png");
+    kimmi_go_sprite = CCSprite::create("kimi_animations/go/000.png");
     // задаём начальную позицию
     kimmi_go_sprite->setPosition(ccp(68,363));
     // задаём якорь на координаты верхнего левого угла (по умолчанию якорь по центру)
     kimmi_go_sprite->setAnchorPoint(ccp(0, 1));
     // добавляем на сцену в 3-й слой
     this->addChild(kimmi_go_sprite, 3);
+
     // создаём объект анимации в который загружаем последовательность файлов
     CCAnimation *kimmi_go = CCAnimation::create();
     for (int i = 1; i < 29; i++)
@@ -108,7 +109,7 @@ bool HelloWorld::init()
         sprintf(szImageFileName, "kimi_animations/go/%03d.png", i);
         kimmi_go->addSpriteFrameWithFileName(szImageFileName);
     }
-    // задаём паузумежду кадрами
+    // задаём паузу между кадрами
     kimmi_go->setDelayPerUnit(0.1f);
     // задаём переключение к 1 кадру после того как дошли до конца
     kimmi_go->setRestoreOriginalFrame(true);
