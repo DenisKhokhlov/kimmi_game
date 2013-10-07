@@ -31,7 +31,8 @@ void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
 	//kimmi_go_sprite->setAnchorPoint(ccp(0, 1));
 	// добавляем на сцену в 4-й слой
 	//this->addChild(kimmi_go_sprite, 4);
-	CCAction *act = CCMoveTo::create(2,location);
+
+	CCAction *act = CCMoveTo::create(2,CCPoint(location.x, kimmi_go_sprite->getPositionY()));
 	kimmi_go_sprite->runAction(act);
 }
 
