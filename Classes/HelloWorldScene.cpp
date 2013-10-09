@@ -19,6 +19,8 @@ CCScene* HelloWorld::scene()
 
 void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
+    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+
 	CCTouch* touch = (CCTouch*)( touches->anyObject());
 	CCPoint location = touch->getLocationInView();
 	location = CCDirector::sharedDirector()->convertToGL(location);
@@ -32,9 +34,22 @@ void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
 	// добавл€ем на сцену в 4-й слой
 	//this->addChild(kimmi_go_sprite, 4);
 
-	CCAction *act = CCMoveTo::create(2,CCPoint(location.x, kimmi_go_sprite->getPositionY()));
-	kimmi_go_sprite->runAction(act);
+	/*CCAction *act = CCMoveTo::create(2,CCPoint(location.x, kimmi_go_sprite->getPositionY()));
+	kimmi_go_sprite->runAction(act);*/
+    keySprite->setPosition(ccp(visibleSize.width - 70, visibleSize.height - 70));
+
 }
+
+
+void HelloWorld::ccTouchesMoved(cocos2d::CCSet* touches, cocos2d::CCEvent* event)
+{
+	CCTouch* touch = (CCTouch*)( touches->anyObject());
+	CCPoint location = touch->getLocationInView();
+	location = CCDirector::sharedDirector()->convertToGL(location);
+	keySprite->setPosition(location);
+
+}
+
 
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
@@ -91,6 +106,11 @@ bool HelloWorld::init()
     backgroundSprite->setPosition(ccp(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
     // add the sprite as a child to this layer
     this->addChild(backgroundSprite, 0);
+    // инструмент, который нужно выбрать
+    keySprite = CCSprite::create("kimmi_tools/key.png");
+    keySprite->setPosition(ccp(visibleSize.width - 70, visibleSize.height - 70));
+    keySprite->setAnchorPoint(ccp(0,1));
+    this->addChild(keySprite,0);
 
     // анимаци€ кимми
     // создаЄм спрайт, который будет анимироватьс€ (это первый кадр из анимации)

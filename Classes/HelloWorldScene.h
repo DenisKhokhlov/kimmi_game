@@ -15,13 +15,17 @@ public:
     
     // a selector callback
     void menuCloseCallback(CCObject* pSender);
-    
+    // обработчик отпускания тача
     void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
+    // обработчик зажатия тача (пока не отпустим)
+    void ccTouchBegun(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
+    void ccTouchesMoved(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
+
 
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);
     // графические и звуковые переменные для класса данной сцены
-    CCSprite * backgroundSprite, *kimmi_go_sprite;
+    CCSprite * backgroundSprite, *kimmi_go_sprite, *keySprite;
 
 };
 
