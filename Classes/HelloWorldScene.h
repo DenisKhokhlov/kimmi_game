@@ -24,8 +24,10 @@ public:
 
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);
+    // спрайты для инструментов
+    CCSprite * keySpriteBig, *ragSpriteBig, * stepladderSpriteBig;
     // графические и звуковые переменные для класса данной сцены
-    CCSprite * backgroundSprite, *kimmi_go_sprite, *keySprite;
+    CCSprite * backgroundSprite, *kimmi_go_sprite, *keySprite, *ragSprite, * stepladderSprite;
 
 };
 
